@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +43,7 @@
 						
 					?>
 					<div class="log-reg-area sign">
-						<br> <b><br></b>
+						
 						<h2 class="log-title">Register</h2>
 							
 						<form method="post" action="">
@@ -62,8 +64,14 @@
 							  <label class="control-label" for="input">Date of Birth</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="text" required="required" name= "marital"/>
-							  <label class="control-label" for="input">Marital Status</label><i class="mtrl-select"></i>
+							  <Select name="marital">
+								  <option value="Maried">Maried</option>
+								  <option value="Divorced">Divorced</option>
+								  <option value="Separated">Separated</option>
+								  <option value="Widow">Widow</option>
+								  <option value="Single">Single</option>
+							  </Select>
+							  <label class="control-label" for="select">Marital Status</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
 								<select name="cell" id="">
@@ -99,34 +107,89 @@
 								</label>
 							  </div>
 							</div>
-							
-							<div class="checkbox">
-							  <label>
-								<input type="checkbox" checked="checked"/><i class="check-box"></i>Accept Terms & Conditions ?
-							  </label>
-							</div>
-							<a href="#" title="" class="already-have">Already have an account</a>
 							<div class="submit-btns">
-								<button class="mtr-btn signup" type="button"><span>Finish</span></button>
+								<button class="mtr-btn" type="submit" name="submit"><span>Finish</span></button>
 							</div>
 						</form>
+						
 						<?php
-						//
-						//
-						//
-						//
-						//
-						//
-						//
-						//
-						//
-						///
-						//
-						//
-						//
-						//
-						//
+						// Recuperate the data 
+						if(isset($_POST['submit']))
+						{
+							$a = $_POST['names'];
+							$b = $_POST['email'];
+							$c = $_POST['telephone'];
+							$ds = $_POST['dob'];
+							$e = $_POST['marital'];
+							$f = $_POST['idnumber'];
+							$g = $_POST['radio'];
+							$h = $_POST['cell'];
+							
+							$today = date('m/d/Y');
+							$d = date_create($ds);
+							$td = date_create($today);
 
+							$age = date_diff($td, $d);
+							//var_dump($age);
+							$ages = ($age->format("%y"));
+							//verify the Id is not manually typed and exist in database.
+							if(isset($_GET['id']) && is_numeric($_GET['id']))
+							{
+								$id = $_GET['id'];
+								$sql = "SELECT L_id, UT_id from t_login WHERE L_id = '$id' LIMIT 1";
+								$ex = mysqli_query($connect, $sql);
+								$rw = mysqli_fetch_array($ex);
+								if(mysqli_num_rows($ex)>0)
+								{
+									//Data  insertion in database
+									$i = $id;
+									$sql = "INSERT INTO `t_user`(`U_names`, `U_dateofbirth`, `U_age`, `U_sex`, `U_maritalstatus`, `U_citizenship`, `U_idnumber`, `U_telephone`, `U_email`,`C_id`, `L_id`) VALUES ('$a', '$ds', '$ages', '$g', '$e', 'Rwandan', '$f', '$c', '$b', '$h', '$i')";
+									$exec = mysqli_query($connect, $sql);
+									
+									if($exec)
+									{
+										//$cell = mysqli_fetch_array($exec);
+										$_SESSION['id'] = $rw['L_id'];
+										$_SESSION['type'] = $rw['UT_id'];
+										$_SESSION['cell'] = $h;
+
+										$id = $_SESSION['type'];
+										if($id == '6')
+										{
+											?>
+											<script type='text/javascript'>
+												window.location.replace("admin/index.php");
+											</script>
+											<?php
+										}
+										else
+										{
+											?>
+											<script type='text/javascript'>
+												window.location.replace("site/index.php");
+											</script>
+											<?php
+										}
+										
+									
+									}
+									else
+									{
+										echo("<p style='color:red'> An error occured</p>");
+									}
+								}
+								else
+								{
+									echo"<p style='color:red'> You are not a well registered user. please reregister</p>";
+								}
+							}
+							
+
+						}	
+						else
+						{
+							//DO nothing.
+						}
 						?>
 					</div>
 				
@@ -144,6 +207,7 @@
 					</div>
 						<?php
 					}?>
+					
 				</div>
 			</div>
 		</div>
