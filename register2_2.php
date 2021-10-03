@@ -166,7 +166,7 @@
 										{
 											?>
 											<script type='text/javascript'>
-												window.location.replace("site/index.php");
+												window.location.replace("feed.php");
 											</script>
 											<?php
 										}
