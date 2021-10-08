@@ -152,15 +152,10 @@
 				<li>
 					<a href="#" title="">Friends</a>
 					<ul>
-						<li><a href="time-line.html" title="">timeline</a></li>
+						<li><a href="friends.php" title="">Friends</a></li>
 						<li><a href="timeline-friends.html" title="">timeline friends</a></li>
 						<li><a href="timeline-groups.html" title="">timeline groups</a></li>
-						<li><a href="timeline-pages.html" title="">timeline pages</a></li>
-						<li><a href="timeline-photos.html" title="">timeline photos</a></li>
-						<li><a href="timeline-videos.html" title="">timeline videos</a></li>
-						<li><a href="fav-page.html" title="">favourit page</a></li>
-						<li><a href="groups.html" title="">groups page</a></li>
-						<li><a href="page-likers.html" title="">Likes page</a></li>
+						
 						<li><a href="people-nearby.html" title="">people nearby</a></li>
 					</ul>
 				</li>
