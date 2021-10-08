@@ -20,6 +20,7 @@
 
 </head>
 <body>
+
 <?php
     if(!isset($_SESSION['id']))
     {
@@ -29,7 +30,7 @@
     ?>
     <div class="topbar stick">
 		<div class="logo">
-			<a title="" href="newsfeed.html"><img src="images/logo.png" alt=""></a>
+			<a title="" href="index.php"><img src="images/logo.png" alt=""></a>
 		</div>
 		
 		<div class="top-area">
@@ -37,26 +38,102 @@
             
 			</div>
 			<div class="login-form">
-				<form method="post">
-					<input type="text" placeholder="User Name">
-					<input type="password" placeholder="Passoword">
-					<button type="submit">Login</button>
+				<form method="post" action="">
+					<input name="username" type="text" placeholder="User Name">
+					<input name="password" type="password" placeholder="Passoword">
+					<button type="submit" name="submit">Login</button>
 				</form>
                 
 			</div>
            
 		</div>
 	</div>
+	<?php
+	if(isset($_POST['submit']))
+	{
+		include_once("db.php");
+		$username = $_POST['username'];
+		$sql = "SELECT * from t_login WHERE L_username='$username' LIMIT 1";
+		$exec = mysqli_query($connect, $sql);
+		$passhash = sha1($_POST['password']);
+		$row = mysqli_fetch_array($exec);
+
+		$test = strcmp($passhash, $row['L_password']); 
+		if($test == 0)
+		{
+			//create session var
+			$_SESSION['id'] = $row['L_id'];
+			$var = $row['L_id'];
+			$rwsql ="SELECT * FROM t_user WHERE L_id = '$var'";
+			$exec = mysqli_query($connect, $rwsql);
+			if($exec)
+			{
+				$rw = mysqli_fetch_array($exec);
+				$_SESSION['type'] = $rwsql['UT_id'];
+				$_SESSION['cell'] = $rwsql['C_id'];
+
+				$id = $_SESSION['type'];
+				if($id == '6')
+				{
+					?>
+					<script type='text/javascript'>
+						window.location.replace("admin/index.php");
+					</script>
+					<?php
+				}
+				else
+				{
+					?>
+					<script type='text/javascript'>
+						window.location.replace("feed.php");
+					</script>
+					<?php
+				}
+			}
+			else
+			{
+				?> 
+				<script type='text/javascript'>
+					window.location.replace("register2_2.php?id=<?=$var?>");
+				</script>
+				<?php
+			}
+			
+		}
+		else
+		{
+			echo("<p style='color:red; text-align: center'>Wrong username and/or password");
+		}
+	}
+	else
+	{
+		
+	}
+	?>
     <?php
       }
       else
       {
     ?>
+	<?php
+	$photovar = $_SESSION['id'];
+	$photovar = $photovar.".jpg";
+	$path= "images/profile/".$photovar;
+	$pname = $photovar;
+	if(file_exists($path))
+	{
+		$pname = $photovar;
+	}
+	else
+	{
+		$pname = "no.jpg";
+	}  
+	
+?>
 <div class="theme-layout">
-
 	<div class="topbar stick">
 		<div class="logo">
-			<a title="" href="newsfeed.html"><img src="images/logo.png" alt=""></a>
+			<a title="" href="feed.php"><img src="images/logo.png" alt=""></a>
 		</div>
 		
 		<div class="top-area">
@@ -73,7 +150,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" title="">timeline</a>
+					<a href="#" title="">Friends</a>
 					<ul>
 						<li><a href="time-line.html" title="">timeline</a></li>
 						<li><a href="timeline-friends.html" title="">timeline friends</a></li>
@@ -90,15 +167,11 @@
 				<li>
 					<a href="#" title="">account settings</a>
 					<ul>
-						<li><a href="create-fav-page.html" title="">create fav page</a></li>
-						<li><a href="edit-account-setting.html" title="">edit account setting</a></li>
-						<li><a href="edit-interest.html" title="">edit-interest</a></li>
-						<li><a href="edit-password.html" title="">edit-password</a></li>
-						<li><a href="edit-profile-basic.html" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation.html" title="">edit work educations</a></li>
-						<li><a href="messages.html" title="">message box</a></li>
-						<li><a href="inbox.html" title="">Inbox</a></li>
-						<li><a href="notifications.html" title="">notifications page</a></li>
+						<li><a href="Profile.php" title="">View Profile</a></li>
+						<li><a href="basicprofile.php" title="">edit account information</a></li>
+						<li><a href="basicontact.php" title="">edit Contacts Information</a></li>
+						<li><a href="basicpassword.php" title="">edit password</a></li>
+						<li><a href="basicpicture.php" title="">edit  Profile picture</a></li>
 					</ul>
 				</li>
 				<li>
@@ -265,14 +338,11 @@
 				</li>
 			</ul>
 			<div class="user-img">
-				<img src="images/resources/admin.jpg" alt="">
+				<img src="images/profile/<?=$pname;?>"  alt="">
 				<span class="status f-online"></span>
 				<div class="user-setting">
-					<a href="#" title=""><span class="status f-online"></span>online</a>
-					<a href="#" title=""><span class="status f-away"></span>away</a>
-					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					<a href="#" title=""><i class="ti-user"></i> view profile</a>
-					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
+					<?php echo("<a href= 'Profile.php?id=".  $_SESSION['id'])."'>" . "<i class='ti-user'></i> view profile</a>";?>
+					<a href="editprofile.php" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="#" title=""><i class="ti-target"></i>activity log</a>
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
@@ -288,10 +358,22 @@
 	</div>
 
 </div>
-
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js"></script>
+<script src="js/main.min.js"></script>
+	<script src="js/backgroundVideo.js"></script>
+	<script src="js/strip.pkgd.min.js"></script>
 	<script src="js/script.js"></script>
-	<script src="js/map-init.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
+	
+	<script>
+		jQuery(window).on('load',function() {
+			"use strict";
+			// video parallax for top featured
+			const backgroundVideo = new BackgroundVideo('.bv-video', {
+			  src: [
+				'videos/video3.MP4',
+			  ]
+			});
+		});
+			
+	</script>
 </body>
 	
