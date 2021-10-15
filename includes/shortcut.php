@@ -35,7 +35,7 @@
 											</li>
 											<li>
 												<i class="ti-share"></i>
-												<a href="people-nearby.html" title="">People Nearby</a>
+												<a href="nearby.php" title="">People Nearby</a>
 											</li>
 											<li>
 												<i class="fa fa-bar-chart-o"></i>

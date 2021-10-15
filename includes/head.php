@@ -69,8 +69,8 @@
 			if($exec)
 			{
 				$rw = mysqli_fetch_array($exec);
-				$_SESSION['type'] = $rwsql['UT_id'];
-				$_SESSION['cell'] = $rwsql['C_id'];
+				$_SESSION['type'] = $rw['UT_id'];
+				$_SESSION['cell'] = $rw['C_id'];
 
 				$id = $_SESSION['type'];
 				if($id == '6')
@@ -156,7 +156,7 @@
 						<li><a href="timeline-friends.html" title="">timeline friends</a></li>
 						<li><a href="timeline-groups.html" title="">timeline groups</a></li>
 						
-						<li><a href="people-nearby.html" title="">people nearby</a></li>
+						<li><a href="nearby.php" title="">people nearby</a></li>
 					</ul>
 				</li>
 				<li>

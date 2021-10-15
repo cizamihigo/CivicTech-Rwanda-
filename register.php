@@ -54,7 +54,7 @@
 							  <input type="password" name="password" required="required"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
-							<a href="login.php" title="" class="forgot-pwd">Already have an account?</a>
+							<a href="index.php" title="" class="forgot-pwd">Already have an account?</a>
 							<div class="submit-btns">
 								
 								<button class="btn"  type="submit"><span>Register</span></button>
