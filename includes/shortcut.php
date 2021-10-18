@@ -11,7 +11,7 @@
 											</li>
 											<li>
 												<i class="ti-files"></i>
-												<a href="fav-page.html" title="">My pages</a>
+												<a href="rooms.php" title="">My rooms</a>
 											</li>
 											<li>
 												<i class="ti-user"></i>
