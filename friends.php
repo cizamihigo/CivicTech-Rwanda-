@@ -82,8 +82,8 @@ include("includes/db.php");
 
                                                                             
                                                                         ?>
-                                                                        <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-                                                                        <a href="#" title="" class="add-butn" data-ripple="">Message</a> <?php }?>
+                                                                        <a href="includes/unfriend.php?id=<?php echo($data['F_id']);?>" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                                                        <a href="includes/mssg.php?id=<?php echo($User['U_id'])?>" title="" class="add-butn" data-ripple="">Message</a> <?php }?>
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -135,8 +135,8 @@ include("includes/db.php");
 
                                                                             
                                                                         ?>
-                                                                        <a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-                                                                        <a href="#" title="" class="add-butn" data-ripple="">Message</a> <?php }?>
+                                                                        <a href="includes/unfriend.php?id=<?php echo($data['F_id']);?>" title="" class="add-butn more-action" data-ripple="">unfriend</a>
+                                                                        <a href="includes/mssg.php?id=<?php echo($rec['U_id'])?>" title="" class="add-butn" data-ripple="">Message</a> <?php }?>
                                                                     </div>
                                                                 </div>
                                                             </li>

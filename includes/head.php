@@ -259,9 +259,9 @@
 						<a href="notifications.html" title="" class="more-mesg">view more</a>
 					</div>
 				</li>
-				<li>
-					<a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
-					<div class="dropdowns">
+				<a href="messages.php"><li>
+					<a href="messages.php" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
+					<!-- <div class="dropdowns">
 						<span>5 New Messages</span>
 						<ul class="drops-menu">
 							<li>
@@ -321,13 +321,13 @@
 							</li>
 						</ul>
 						<a href="messages.html" title="" class="more-mesg">view more</a>
-					</div>
+					</div> -->
 				</li>
+				</a>
 				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
 					<div class="dropdowns languages">
 						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
+						<a href="#" title="">Kinyarwanda</a>
 						<a href="#" title="">French</a>
 					</div>
 				</li>

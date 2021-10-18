@@ -3,10 +3,10 @@
     if(isset($_GET['id']) && is_numeric($_GET['id']))
     {
         $a = $_GET['id'];
-        $sql = " UPDATE t_friend SET F_is_pending = 0 WHERE F_id = '$a' ";
+        $sql = " DELETE FROM `t_friend` WHERE F_id = '$a' ";
         ?>
             <Script>
-                alert("Do you really want do delete this request");
+                alert("Do you really want do unfriend this friend?");
             </Script>
 
         <?php

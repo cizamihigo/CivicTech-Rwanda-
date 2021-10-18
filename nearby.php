@@ -19,55 +19,76 @@ include("includes/db.php");
                                     <div id="searchDir"></div>
                                     <ul id="people-list" class="friendz-list">
                                         <?php
-                                            $sql = "SELECT * FROM t_user";
+                                            $session = $_SESSION['id'];
+                                            $sql = "SELECT * FROM t_user WHERE U_id != '$session' AND u_id  NOT IN(SELECT U_id_Sender FROM t_friend WHERE U_id_Sender = '$session') ";
                                             $sqyery = mysqli_query($connect, $sql);
                                             if($sqyery)
                                             {
-                                                $row1 = mysqli_fetch_array($sqyery);
-                                                $count = mysqli_num_rows($sqyery);
-                                                $r = $count;
+                                                
+                                                #$count = mysqli_num_rows($sqyery);
+                                                #$r = $count;
                                                 //echo($r);
-                                                $session = $_SESSION['id'];
-                                                while($r > 1)
+                                                
+                                               // $row1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM t_user"));
+                                               
+                                                while($row = mysqli_fetch_array($sqyery))
                                                 {
 
-                                                    $user = $row1['U_id'];
-                                                    $sqelect = "SELECT * FROM t_friend WHERE (U_id_Sender=$r AND U_id_Receiver='$session') OR (U_id_Sender='$session' AND U_id_Receiver='$r') ";
+                                                    $user = $row['U_id'];
+                                                    
+                                                    $sqelect = "SELECT * FROM t_friend WHERE (U_id_Sender= '$user' AND U_id_Receiver='$session') OR (U_id_Sender='$session' AND U_id_Receiver='$user') ";
                                                     $exe = mysqli_query($connect, $sqelect);
                                                     if($exe)
                                                     {
                                                         ?>
                                                     <li>
+                                                        <?php
+                                                            $photovar = $row['U_id'];
+                                                            $photovar = $photovar.".jpg";
+                                                            $path= "images/profile/".$photovar;
+                                                            $pname = $photovar;
+                                                            if(file_exists($path))
+                                                            {
+                                                                $pname = $photovar;
+                                                            }
+                                                            else
+                                                            {
+                                                                $pname = "no.jpg";
+                                                            }  
+                                                        ?>
                                                         <figure>
-                                                            <img src="images/resources/friend-avatar.jpg" alt="">
+                                                            <img src="images/profile/<?php echo($pname);?>" alt="">
                                                             
                                                         </figure>
                                                         <div class="friendz-meta">
-                                                            <a href="time-line.html"><?php echo($row1['U_names']) ?></a>
-                                                            <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d7c9ced4c5d2d3cfccc4c5d2e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</a></i>
-                                                        </div>
-                                                    </li>
+                                                            <a href=""><?php echo($row['U_names']) ?></a>
+                                                            <i><a href="" class="__cf_email__">[email&#160;Not revealed] <br> <?php echo($row["U_sex"]);?> <br> <?php echo($row["U_age"] . " Years old");?></a></i>
+                                                        </div></li>
                                                         <?php
+                                                        $row1 = $row['U_id'];
                                                     }
                                                     else
                                                     {
                                                         echo("Bad");
                                                     }
-                                                    $r--;
+                                                    
                                                 }
-                                            }
-                                            else
-                                            {
-                                                echo("bad");
-                                            }
+                                          
 
 
                                         ?>
+                                         <?php
+                                          }
+                                          else
+                                          {
+                                              echo("bad");
+                                          }
+                                    // ?>
                                     </ul>
                                     <div class="chat-box">
                                         <div class="chat-head">
                                             
-                                            <h6><?php echo($row1['U_names']);?></h6>
+                                            <h6><?php echo("Send Request");?></h6>
                                             <div class="more">
                                                 
                                                 <span class="close-mesage"><i class="ti-close"></i></span>
@@ -75,31 +96,26 @@ include("includes/db.php");
                                         </div>
                                         <center>
                                             <div class="chat-list">
-                                                <ul>
-                                                    <li class="you">
-                                                        
-                                                        <div class="notification-event">
-                                                            <span class="chat-message-item">
-                                                                <?php echo($row1['U_age'] . "  Years old"); ?> <br>
-                                                                <?php echo($row1['U_sex'] . "  Person"); ?> <br>
-                                                                <?php echo($row1['U_maritalstatus'] . "  as Marital status"); ?> <br>
-                                                                <?php 
-                                                                    $ville = $row1['C_id'];
-                                                                    $SEL = "SELECT * FROM t_cell WHERE C_id = '$ville'";
-                                                                    $sexec = mysqli_query($connect, $SEL);
-                                                                    $ms = mysqli_fetch_array($sexec);
-                                                                ?>
-                                                                <?php echo($ms['C_name'] . "  is his cell"); ?> <br>
-                                                            </span>
-                                                            
-                                                        </div>
-                                                    </li>
-                                                    
-                                                    
-                                                </ul>
+                                               
                                                 
                                                 <center class="you">
-                                                    <a href="includes/sendreq.php?id=<?php echo($row1['U_id']);?>"><button type="" class="you">Send Friend Request</button></a>
+                                                    <form action="includes/sendreq.php" method="get">
+                                                    <select name="id" id="">
+                                                        <?php
+                                                            $slect = "SELECT * FROM t_user WHERE U_id != '$session'";
+                                                            $ex = mysqli_query($connect, $slect);
+                                                            $numr = mysqli_num_rows($ex);
+                                                            
+                                                            while($rrr = mysqli_fetch_array($ex)){
+                                                                ?>
+                                                        <option value="<?php echo($rrr['U_id'])?>"><?php echo($rrr['U_names']);?></option>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </select>
+
+                                                    <button type="submit">Send Friend Request</button></a>
+                                                    </form>
                                                 </center>
                                                     
                                             
@@ -107,6 +123,7 @@ include("includes/db.php");
                                         </center>
                                        
                                     </div>
+                                   
                                 </div>
                             </div>
                         </div>	
