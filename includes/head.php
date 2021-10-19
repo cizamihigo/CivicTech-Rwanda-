@@ -70,7 +70,7 @@
 			{
 				$rw = mysqli_fetch_array($exec);
 				$_SESSION['type'] = $rw['UT_id'];
-				$_SESSION['cell'] = $rw['C_id'];
+				//$_SESSION['cell'] = $rw['C_id'];
 
 				$id = $_SESSION['type'];
 				if($id == '6')
