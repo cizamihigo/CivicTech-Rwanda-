@@ -49,7 +49,7 @@ include_once("includes/head.php");
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								<div class="loadMore">
+								<!-- <div class="loadMore"> -->
 								<div class="central-meta item">
 									<div class="user-post">
 										<div class="friend-info">
@@ -225,7 +225,7 @@ include_once("includes/head.php");
 									</div>
 								</div>
 								
-								</div>
+								<!-- </div> -->
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">
