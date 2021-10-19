@@ -42,7 +42,7 @@
 											<div class="inbox-lists">
 												<div class="inbox-action">
 													<ul>
-														<li><a class="delete-email" title=""><i class="fa fa-trash-o"></i> Leave Room</a></li>
+														<li><a href="includes/leave.php?id=<?php echo($room);?>" class="delete-email" title=""><i class="fa fa-trash-o"></i> Leave Room</a></li>
 														<li><a href='' title=""><i class="fa fa-refresh"></i> Refresh</a></li>
 													</ul>
 												</div>
