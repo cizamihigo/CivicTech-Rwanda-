@@ -269,7 +269,7 @@ include_once("includes/db.php");
 
 													?>
 													<li>
-														<a href="#" title="" class="showmore underline">more comments</a>
+														<a href="morecomment.php?feed=<?php echo($feed)?>" title="" class="showmore underline">more comments</a>
 													</li> <?php }?>
 
 														<?php
