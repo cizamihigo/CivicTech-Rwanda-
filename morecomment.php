@@ -1,5 +1,32 @@
 <?php
 	include("includes/head.php");
+	include("includes/db.php");
+	if(isset($_GET['feed']) && !empty($_GET['feed']))
+	{
+		$var = $_GET['feed'];
+		$Sql = "SELECT * FROM t_feed WHERE F_id='$var'";
+		$ex = mysqli_query($connect, $Sql);
+		if($ex)
+		{
+			$rw = mysqli_fetch_array($ex);
+			if(isset($rw) && !empty($rw))
+			{
+				$name = $rw['U_id'];
+				$selce = "SELECT * FROM t_user WHERE U_id= '$name'";
+				$sexc = mysqli_query($connect, $selce);
+				if($sexc)
+				{
+					$n = mysqli_fetch_array($sexc);
+					
+
+				}
+			}
+			else
+			{
+				echo(",");
+			}
+		}
+	}
 ?>
 
 
@@ -13,135 +40,115 @@
 								<div class="inbox-sec">
 									<div class="row">
 										<div class="col-lg-3 col-md-3 col-sm-4">
+											
+											<div class="inbox-panel-head">
+													<img alt="" src="images/resources/friend-avatar11.jpg">
+													<center><h2><i>Post </i> </h2></center>
+													<ul>
+														<?php
+															$uid = $n['U_id'];
+															$session = $_SESSION['id'];
+															$friend = "SELECT * FROM t_friend WHERE (U_id_Sender= '$uid' AND U_id_Receiver= '$session') OR  (U_id_Sender= '$session' AND U_id_Receiver= '$uid')";
+															$friendex = mysqli_query($connect, $friend);
+															if($friendex)
+															{
+																$f = mysqli_fetch_array($friendex);
+																$fr = mysqli_num_rows($friendex);
+																if($fr == 1 && $fr != $session)
+																{
+																	?>
+																	<li><a class="compose-btn" title="" href="#">Write to post Owner</a></li>
+																	<?php
+																}
+																else
+																{
+																	?>
+																	<p class="compose-btn">¨¨Post sender not friend¨¨</p>
+																	<?php
+																}
+															}
+															else
+															{
+																echo("Error");
+															}
+														?>
+															</ul>
+											</div><!-- Inbox Panel Head -->
 											<div class="inbox-navigation">
 												<?php
-													include("includes/shortcut.php");
-												?>	
-											
+														$ss = "SELECT U_id FROM t_post_comment  WHERE F_id = '$var' ";
+														$qss = mysqli_query($connect, $ss);
+												?>
+													<br>
+													<center><span><i><h3>Commentors</h3></i></span></center>
+													
+													<ul>
+														<?php
+															$arr = array();
+															while($rrr = mysqli_fetch_array($qss))
+															{
+																if(in_array($rrr['U_id'], $arr))
+																{
+
+																}
+																else
+																{
+																	array_push($arr, $rrr['U_id']);
+																}
+																
+																?>
+															
+																<?php
+															}
+															for($i = 0; $i< sizeof($arr); $i++)
+															{
+																$vardu = $arr[$i];
+																$sel = "SELECT * FROM t_user WHERE U_id = '$vardu'";
+																$squery = mysqli_query($connect, $sel);
+																$ro = mysqli_fetch_array($squery);
+																?>
+															<li>Name: <?php echo($ro['U_names'])?></li>
+																<?php
+															}
+															//var_dump($arr);
+														?>
+														
+													</ul>
+													
+												</div>
 											</div>
-										</div>
+										
 										<div class="col-lg-9 col-md-9 col-sm-8">
 											<div class="inbox-lists">
 												
 												<div class="mesages-lists">
-													<form method="post">
-														<input type="text" placeholder="Search Email">
-													</form>
+													<center><i><h3>All post comments</h3></i></center>
 													<ul id="message-list" class="message-list">
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this starred"><i class="fa fa-star-o"></i></span>
+														<?php 
+															$ti = "SELECT * FROM t_post_comment WHERE F_id = '$var' ";
+															$rrti = mysqli_query($connect, $ti);
+															while ($a = mysqli_fetch_array($rrti)) {
+																
 
-															<h3 class="sender-name">Darlina Jaze</h3>
-															<a title="" data-toggle="tooltip" data-original-title="Attachment"><i class="fa fa-paperclip"></i></a>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
+															
+														?>
+														<li class="">
+															
+															<?php
+																$nameuser = $a['U_id'];
+																$ssss = "SELECT U_names FROM t_user WHERE U_id = '$nameuser'";
+																$lolo = mysqli_query($connect, $ssss);
+																$rty = mysqli_fetch_array($lolo);
+															?>
+															<h3 class="sender-name"><?php echo($rty['U_names']);?></h3>
+															
 
-															<p>It is a long established fact that a reader will be distracted</p>
+															<p><?php echo($a['pC_content']);?></p><br><span><i><?php echo($a['pC_date']);?></i></span>
 														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this "><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Barlina Maze</h3>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>That a reader will be distracted by the readable content..</p>
-														</li>
-														<li class="read">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this starred"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Jonathan Dae</h3>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>Will be distracted by the readable..</p>
-														</li>
-														<li class="read">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Humaina Burb</h3>
-															<a title="" data-toggle="tooltip" data-original-title="Attachment"><i class="fa fa-paperclip"></i></a>
-															<span class="make-important important-done"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>It is a long established fact by the readable ponkaa..</p>
-														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this "><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Barlina Maze</h3>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>Long  will be distracted by the readable..</p>
-														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this starred"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Darlina Jaze</h3>
-															<a title="" data-toggle="tooltip" data-original-title="Attachment"><i class="fa fa-paperclip"></i></a>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>Reader will be distracted by the nalanye..</p>
-														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this starred"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Darlina Jaze</h3>
-															<a title="" data-toggle="tooltip" data-original-title="Attachment"><i class="fa fa-paperclip"></i></a>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>It is a long established fact that a reader will be distracted</p>
-														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this "><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Barlina Maze</h3>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>That a reader will be distracted by the readable content..</p>
-														</li>
-														<li class="read">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this starred"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Jonathan Dae</h3>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>Will be distracted by the readable..</p>
-														</li>
-														<li class="read">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Humaina Burb</h3>
-															<a title="" data-toggle="tooltip" data-original-title="Attachment"><i class="fa fa-paperclip"></i></a>
-															<span class="make-important important-done"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>It is a long established fact by the readable ponkaa..</p>
-														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this "><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Barlina Maze</h3>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>Long  will be distracted by the readable..</p>
-														</li>
-														<li class="unread">
-															<input class="select-message" type="checkbox" />
-															<span class="star-this starred"><i class="fa fa-star-o"></i></span>
-
-															<h3 class="sender-name">Darlina Jaze</h3>
-															<a title="" data-toggle="tooltip" data-original-title="Attachment"><i class="fa fa-paperclip"></i></a>
-															<span class="make-important"><i class="fa fa-thumb-tack"></i></span>
-
-															<p>Reader will be distracted by the nalanye..</p>
-														</li>
+														<?php
+															}
+														?>
+														
 													</ul>
 												</div>
 											</div><!-- Inbox lists -->
