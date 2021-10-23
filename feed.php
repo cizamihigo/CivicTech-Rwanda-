@@ -255,7 +255,7 @@ include_once("includes/db.php");
 															<img src="images/resources/comet-1.jpg" alt="">
 														</div>
 														<div class="post-comt-box">
-															<form method="post" action="formpost.php">
+															<form method="post" action="includes/formpost.php?feed=<?php echo($row['F_id']); ?>">
 																<textarea placeholder="Post your comment" name="message"></textarea>
 																
 																<button class="attachments " type="submit" name="send" style="color: blue"><b>Send</b> </button>
