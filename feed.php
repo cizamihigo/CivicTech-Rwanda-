@@ -17,6 +17,26 @@ include_once("includes/db.php");
 	}  
 	
 ?>
+<?php
+	function picimport($id)
+	{
+		$photovar = $id;
+		$photovar = $photovar.".jpg";
+		$path= "images/profile/".$photovar;
+		$pname = $photovar;
+		if(file_exists($path))
+		{
+			$pname = $photovar;
+		}
+		else
+		{
+			$pname = "no.jpg";
+		}  
+		return $pname;
+		
+	}
+
+?>
 
 <?php
 	//Pages
@@ -201,7 +221,7 @@ include_once("includes/db.php");
 											<div class="coment-area">
 												<ul class="we-comet">
 													<?php
-														$comment = "SELECT *, count(*)'num' FROM t_post_comment WHERE F_id='$feed'";
+														$comment = "SELECT t_post_comment.*, count(*)'num' FROM t_post_comment WHERE F_id='$feed'";
 														$excomm = mysqli_query($connect, $comment);
 														if($excomm)
 														{
@@ -214,32 +234,46 @@ include_once("includes/db.php");
 																
 															
 													?>
-												
-													<li>
+													<?php
+													
+														$voit = "SELECT * FROM t_post_comment WHERE F_id ='$feed' LIMIT 0,2";
+														$exevoit = mysqli_query($connect, $voit);
+														while($rd = mysqli_fetch_array($exevoit))
+														{
+															//var_dump($rd);
+														
+														?>
+														<li>
 														<div class="comet-avatar">
-															<img src="images/resources/comet-1.jpg" alt="">
+														<img src="images/profile/<?php echo(picimport($rd['U_id']));?>" alt="">
 														</div>
 														<div class="we-comment">
 															<div class="coment-head">
-																<h5><a href="time-line.html" title="">Jason borne</a></h5>
-																<span>1 year ago</span>
+																<?php
+																	$rdd = $rd['U_id'];
+																	$ss ="SELECT * FROM t_user WHERE U_id= '$rdd'";
+																	$sqs = mysqli_query($connect, $ss);
+																	$rud = mysqli_fetch_array($sqs);
+																?>
+																<h5><a href="time-line.html" title=""><?php echo($rud['U_names']);?></a></h5>
+																<span><?php echo($rd['pC_date']);?></span>
 																
 															</div>
-															<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
+															<p><?php echo($rd['pC_content']);?></p>
 														</div>
 														
 													</li>
+													<?php }?>
 													<?php }if($nums > 2)
 													{
 
 													?>
 													<li>
 														<a href="#" title="" class="showmore underline">more comments</a>
-													</li> <?php }
-													else
-													{
-														echo "<center><span><i>no comment yet</i></span></center>";
-													}
+													</li> <?php }?>
+
+														<?php
+													
 													?>
 													<?php
 														} 
@@ -252,7 +286,7 @@ include_once("includes/db.php");
 													
 													<li class="post-comment">
 														<div class="comet-avatar">
-															<img src="images/resources/comet-1.jpg" alt="">
+															<img src="images/profile/<?php echo(picimport($_SESSION['id']));?>" alt="">
 														</div>
 														<div class="post-comt-box">
 															<form method="post" action="includes/formpost.php?feed=<?php echo($row['F_id']); ?>">
