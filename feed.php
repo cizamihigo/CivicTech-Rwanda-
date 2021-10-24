@@ -292,7 +292,7 @@ include_once("includes/db.php");
 															<form method="post" action="includes/formpost.php?feed=<?php echo($row['F_id']); ?>">
 																<textarea placeholder="Post your comment" name="message"></textarea>
 																
-																<button class="attachments " type="submit" name="send" style="color: blue"><b>Send</b> </button>
+																<button class="attachments " type="submit" name="send" style="color: blue"><i class="fa fa-paper-plane-o"></i> </button>
 															</form>	
 
 														</div>

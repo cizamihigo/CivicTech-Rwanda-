@@ -19,7 +19,7 @@
 											</li>
 											<li>
 												<i class="ti-image"></i>
-												<a href="timeline-photos.html" title="">images</a>
+												<a href="projects.php" title="">projects</a>
 											</li>
 											<li>
 												<i class="ti-video-camera"></i>
