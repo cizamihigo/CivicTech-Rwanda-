@@ -7,7 +7,7 @@
 											</li>
 											<li>
 												<i class="ti-mouse-alt"></i>
-												<a href="inbox.html" title="">Inbox</a>
+												<a href="announcement.php" title="">Official Announcements</a>
 											</li>
 											<li>
 												<i class="ti-files"></i>
@@ -22,8 +22,8 @@
 												<a href="projects.php" title="">projects</a>
 											</li>
 											<li>
-												<i class="ti-video-camera"></i>
-												<a href="timeline-videos.html" title="">videos</a>
+												<i class="ti-book"></i>
+												<a href="monitoring.php" title="">Monitoring</a>
 											</li>
 											<li>
 												<i class="ti-comments-smiley"></i>
@@ -31,7 +31,7 @@
 											</li>
 											<li>
 												<i class="ti-bell"></i>
-												<a href="notifications.html" title="">Notifications</a>
+												<a href="notifications.php" title="">Notifications</a>
 											</li>
 											<li>
 												<i class="ti-share"></i>
@@ -39,7 +39,7 @@
 											</li>
 											<li>
 												<i class="fa fa-bar-chart-o"></i>
-												<a href="insights.html" title="">insights</a>
+												<a href="insights.php" title="">insights</a>
 											</li>
 											<li>
 												<i class="ti-power-off"></i>

@@ -2575,7 +2575,7 @@ if (typeof NProgress != 'undefined') {
 				var $datatable = $('#datatable-checkbox');
 
 				$datatable.dataTable({
-				  'order': [[ 1, 'asc' ]],
+				  'Messages': [[ 1, 'asc' ]],
 				  'columnDefs': [
 					{ orderable: false, targets: [0] }
 				  ]
