@@ -105,6 +105,9 @@ include('includes/scripts.php');
            
             <td>
               <?php
+                  if(isset($_SESSION['id']))
+                  {
+
                   
                   if($_SESSION['id'] == $va)
                   {
@@ -123,7 +126,7 @@ include('includes/scripts.php');
                 </form>
             </td>
             <?php
-                  }
+                   } }
                   else
                   {
                     echo("...");
