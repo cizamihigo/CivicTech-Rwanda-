@@ -1,0 +1,4 @@
+AuthName "Please enter credentials to access this part of the site"
+AuthType Basic
+AuthUserFile "C:\xampp\htdocs\CIVICTECH\admin\.htpasswd"
+Require valid-user
