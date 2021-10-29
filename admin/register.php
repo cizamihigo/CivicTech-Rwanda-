@@ -1,6 +1,7 @@
 <?php
 include('includes/header.php'); 
 include('includes/navbar.php'); 
+include('includes/scripts.php'); 
 ?>
 
 
@@ -67,19 +68,39 @@ include('includes/navbar.php');
           <tr>
             <th> ID </th>
             <th> Username </th>
-            <th>Email </th>
+            <th>Names & email </th>
             <th>Password</th>
             <th>EDIT </th>
             <th>DELETE </th>
           </tr>
         </thead>
         <tbody>
-     
+              <?php
+                $sq = "SELECT * FROM t_login WHERE  UT_id= 6";
+                $sql = mysqli_query(mysqli_connect("localhost","root","","civicTech"), $sq);
+                if($sql){
+                  while ($rr = mysqli_fetch_array($sql)) {
+                    # code...
+                    //echo("salut");
+                  
+                  
+
+                 
+              ?>
           <tr>
-            <td> 1 </td>
-            <td> Funda of WEb IT</td>
-            <td> funda@example.com</td>
-            <td> *** </td>
+            <td> <?php echo($rr['L_id']);?> </td>
+            <td>  <?php echo($rr['L_username']);?> </td>
+            <?php $va = $rr['L_id']; 
+            $v = "SELECT * FROM t_user WHERE U_id='$va'";
+            $ss = mysqli_query(mysqli_connect("localhost","root","","civicTech"), $v);
+            $t = mysqli_fetch_array($ss); ?>
+            <td> <?php echo($t['U_names']); ?>, <?php echo($t['U_email']); ?></td>
+            <td> <?php
+              $var = md5($rr['L_password']);
+              echo($var."***");
+               // session_start();
+              //echo($_SESSION['id']);
+            ?></td>
             <td>
                 <form action="" method="post">
                     <input type="hidden" name="edit_id" value="">
@@ -92,7 +113,14 @@ include('includes/navbar.php');
                   <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                 </form>
             </td>
+
           </tr>
+          <?php
+          // 
+            }
+                      
+          }
+          ?>
         
         </tbody>
       </table>
