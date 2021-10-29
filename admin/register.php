@@ -1,5 +1,6 @@
 <?php
 include('includes/header.php'); 
+session_start();
 include('includes/navbar.php'); 
 include('includes/scripts.php'); 
 ?>
@@ -14,7 +15,7 @@ include('includes/scripts.php');
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="code.php" method="POST">
+      <form action="includes/code.php" method="POST">
 
         <div class="modal-body">
 
@@ -92,27 +93,47 @@ include('includes/scripts.php');
             <td>  <?php echo($rr['L_username']);?> </td>
             <?php $va = $rr['L_id']; 
             $v = "SELECT * FROM t_user WHERE U_id='$va'";
-            $ss = mysqli_query(mysqli_connect("localhost","root","","civicTech"), $v);
+            $ss = mysqli_query(mysqli_connect("localhost","root","","civictech"), $v);
             $t = mysqli_fetch_array($ss); ?>
-            <td> <?php echo($t['U_names']); ?>, <?php echo($t['U_email']); ?></td>
+            <td> <?php echo($t['U_names']); ?>  - <?php echo($t['U_email']); ?></td>
             <td> <?php
               $var = md5($rr['L_password']);
               echo($var."***");
                // session_start();
               //echo($_SESSION['id']);
             ?></td>
+           
             <td>
-                <form action="" method="post">
+              <?php
+                  
+                  if($_SESSION['id'] == $va)
+                  {
+
+              ?>
+                <form action="includes/edit.php?id=<?php echo($va)?>" method="post">
                     <input type="hidden" name="edit_id" value="">
                     <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                 </form>
             </td>
+           
             <td>
-                <form action="" method="post">
+                <form action="includes/deletemyaccount.php?id=<?php echo($va)?>" method="post">
                   <input type="hidden" name="delete_id" value="">
                   <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                 </form>
             </td>
+            <?php
+                  }
+                  else
+                  {
+                    echo("...");
+                    ?>
+                  
+                  <td>...</td>
+
+                    <?php
+                  }
+            ?>
 
           </tr>
           <?php
