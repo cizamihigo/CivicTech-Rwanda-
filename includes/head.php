@@ -64,7 +64,7 @@
 			//create session var
 			$_SESSION['id'] = $row['L_id'];
 			$var = $row['L_id'];
-			$rwsql ="SELECT * FROM t_user WHERE L_id = '$var'";
+			$rwsql ="SELECT * FROM t_login WHERE L_id = '$var'";
 			$exec = mysqli_query($connect, $rwsql);
 			if($exec)
 			{
@@ -72,8 +72,10 @@
 				$_SESSION['type'] = $rw['UT_id'];
 				//$_SESSION['cell'] = $rw['C_id'];
 
-				$id = $_SESSION['type'];
-				if($id == '6')
+				$id = $rw['UT_id'];
+				echo($id);
+				
+				if($id == 6)
 				{
 					?>
 					<script type='text/javascript'>
@@ -89,6 +91,7 @@
 					</script>
 					<?php
 				}
+				
 			}
 			else
 			{
