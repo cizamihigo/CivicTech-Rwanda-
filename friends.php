@@ -15,8 +15,8 @@ include("includes/db.php");
                                     $lid= $_SESSION['id'];
                                     $query = "SELECT * FROM t_friend WHERE U_id_Sender= '$lid' OR U_id_Receiver= '$lid'";
                                     $exe = mysqli_query($connect, $query);
-                                    $data = mysqli_fetch_array($exe);
-                                    $var = mysqli_num_rows($exe);
+                                    //$data = mysqli_fetch_array($exe);
+                                    
                                     //var_dump($var);
                                     $user_check[]=$_SESSION['id'];
                                     
@@ -36,8 +36,10 @@ include("includes/db.php");
                                         <div class="tab-pane active fade show " id="frends" >
                                             <ul class="nearby-contct">
                                                 <?php
-                                                    for($i=0; $i < $var; $i++)
+                                                    $va= 0;
+                                                    while($data = mysqli_fetch_array($exe))
                                                     {
+                                                        $var = mysqli_num_rows($exe);
                                                         $uid = $data['U_id_Receiver'];
                                                         $sql ="SELECT * FROM t_user WHERE U_id='$uid'";
                                                         $exec = mysqli_query($connect, $sql);
@@ -148,7 +150,9 @@ include("includes/db.php");
                                                                         ?>
                                                                     
                                                                     <?php
-                                                                    }
+                                                                    //$i++;
+                                                                    $va++;
+                                                    }
                                                                     // echo("<br/>");
                                                                     ?>
                                             

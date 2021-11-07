@@ -27,7 +27,8 @@
             $_sql = "INSERT INTO t_executor(U_id, pro_id) VALUES('$uid', '$var')";
             $_exsql = mysqli_query($connect, $_sql);
             if($_exsql){
-            header("Location: ../index.php?successDONE"); }
+
+            header("Location: ../smstwilio/index.php"); }
         }
         else{
             header("Location: ../register.php");

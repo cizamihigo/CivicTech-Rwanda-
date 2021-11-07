@@ -51,7 +51,7 @@ session_start();
                     </body>
                 </html>
             ';
-            mail("cizamihigochristian@gmail.com", "Passowrd resset -  CivicTech Rwanda", $message, $header);
+            mail("cizamihigochristian@gmail.com", "Passowrd reset -  CivicTech Rwanda", $message, $header);
             
             header("Location: ../forgetpass.php");
 

@@ -10,17 +10,17 @@
 							<a href="index-2.html" title=""><img src="images/logo.png" alt=""></a>
 						</div>	
 						<p>
-							The trio took this simple idea and built it into the world’s leading carpooling platform.
+							This is the implementation of a civic-Tech system. this system aim to link citizens and government
 						</p>
 					</div>
 					<ul class="location">
 						<li>
 							<i class="ti-map-alt"></i>
-							<p>33 new montgomery st.750 san francisco, CA USA 94105.</p>
+							<p>33 Gisozi, Kigali, Near Kigali Independent University</p>
 						</li>
 						<li>
 							<i class="ti-mobile"></i>
-							<p>+1-56-346 345</p>
+							<p>+250- 782-764 287</p>
 						</li>
 					</ul>
 				</div>
@@ -29,11 +29,11 @@
 				<div class="widget">
 					<div class="widget-title"><h4>follow</h4></div>
 					<ul class="list-style">
-						<li><i class="fa fa-facebook-square"></i> <a href="https://web.facebook.com/shopcircut/" title="">facebook</a></li>
-						<li><i class="fa fa-twitter-square"></i><a href="https://twitter.com/login?lang=en" title="">twitter</a></li>
-						<li><i class="fa fa-instagram"></i><a href="https://www.instagram.com/?hl=en" title="">instagram</a></li>
-						<li><i class="fa fa-google-plus-square"></i> <a href="https://plus.google.com/discover" title="">Google+</a></li>
-						<li><i class="fa fa-pinterest-square"></i> <a href="https://www.pinterest.com/" title="">Pintrest</a></li>
+						<li><i class="fa fa-facebook-square"></i> <a href="" title="">facebook</a></li>
+						<li><i class="fa fa-twitter-square"></i><a href="" title="">twitter</a></li>
+						<li><i class="fa fa-instagram"></i><a href="" title="">instagram</a></li>
+						<li><i class="fa fa-google-plus-square"></i> <a href="" title="">Google+</a></li>
+						<li><i class="fa fa-pinterest-square"></i> <a href="" title="">Pintrest</a></li>
 					</ul>
 				</div>
 			</div>

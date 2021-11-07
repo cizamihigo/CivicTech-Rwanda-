@@ -32,42 +32,43 @@ include("includes/head.php");
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-heading">
-						<h2>Our Team</h2>
+							<br>
+						<h2>Key features</h2>
 					</div>
 				</div>	
 				<div class="col-lg-3 col-sm-6">
 					<div class="our-teambox">
-						<figure><img src="images/resources/team1.jpg" alt=""></figure>
+						<figure><img src="images/resources/bloglist-1.jpg" alt=""></figure>
 						<div class="team-info">
-							<h4>Sara Grey</h4>
-							<span>Designer</span>
+							<h4>Citizen collaboration</h4>
+							<span>both government and citizen</span>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="our-teambox">
-						<figure><img src="images/resources/team2.jpg" alt=""></figure>
+						<figure><img src="images/resources/blog-detail2.jpg" alt=""></figure>
 						<div class="team-info">
-							<h4>Peeter Paker</h4>
-							<span>Developer</span>
+							<h4>Project evaluation</h4> <br><br><br>
+							<span>By citizens</span>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="our-teambox">
-						<figure><img src="images/resources/team3.jpg" alt=""></figure>
+						<figure><img src="images/resources/btm-baner-avatar.png" alt=""></figure>
 						<div class="team-info">
-							<h4>Amy watson</h4>
-							<span>Support</span>
+							<h4>Support and communication</h4>
+							<span>citizens & government</span>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="our-teambox">
-						<figure><img src="images/resources/team4.jpg" alt=""></figure>
+						<figure><img src="images/resources/bloglist-3.jpg" alt=""></figure>
 						<div class="team-info">
-							<h4>jaison born</h4>
-							<span>Operations</span>
+							<h4>just relax</h4>
+							<span>your voice counts</span>
 						</div>
 					</div>
 				</div>
